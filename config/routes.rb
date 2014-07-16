@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root 'splash_pages#index'
   match '/register_interest',  to: 'splash_pages#register_interest', via: 'get'
+  resources :users
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
