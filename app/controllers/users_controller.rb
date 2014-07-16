@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
 	private
 		def full_user
-			params.require('user').permit(:username, :email)
+			params.require('user').permit(:email)
 		end
 
 end
