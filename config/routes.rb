@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'splash_pages#index'
   match '/register_interest',  to: 'splash_pages#register_interest', via: 'get'
   resources :users
+  resources :data_files
 
 
 

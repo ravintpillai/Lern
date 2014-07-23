@@ -1,0 +1,9 @@
+<h1> Upload a file! </h1>
+
+<%=form_for @data_file do |d| %>
+	<fieldset>
+	<%= d.file_field :csv %>
+	</fieldset>
+	<%= d.submit %>
+<% end %>
+
