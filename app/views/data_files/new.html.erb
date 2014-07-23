@@ -1,9 +1,10 @@
+<%= flash[:success] %>
+
 <h1> Upload a file! </h1>
 
-<%=form_for @data_file do |d| %>
-	<fieldset>
-	<%= d.file_field :csv %>
-	</fieldset>
-	<%= d.submit %>
+<%= form_tag(data_files_path, { method: :post, multipart: true }) do %>
+  <fieldset>
+    <%= file_field_tag  'data_file[csv]' %>
+  </fieldset>
+  <%= submit_tag %>
 <% end %>
-

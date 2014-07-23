@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716220910) do
+ActiveRecord::Schema.define(version: 20140723211149) do
 
   create_table "data_files", force: true do |t|
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

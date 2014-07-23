@@ -1,16 +1,24 @@
+require 'fileutils'
+
 class DataFilesController < ApplicationController
 
 	def index
 	end
 
 	def new
-		@data_file = DataFile.new()
 	end
 
 	def create
-		@data_file = DataFile.new(safe_data)
-		@data_file.save
-		redirect_to @data_file
+    Rails.logger.info "Ravin, it's a #{safe_data[:csv].class}"
+
+    tmp = safe_data[:csv].tempfile
+    FileUtils.cp(tmp.path, "#{Rails.root}/public/#{safe_data[:csv].original_filename}")
+
+    flash.now[:success]="Great Success"
+
+    @data_file = DataFile.new({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
+    @data_file.save
+    render :new
 	end
 
 	def show
