@@ -1,11 +1,15 @@
 require 'fileutils'
-
 class DataFilesController < ApplicationController
 
 	def index
 	end
 
 	def new
+    if user_signed_in?
+      render :new
+    else
+      redirect_to "users/sign_up"
+    end
 	end
 
 	def create
@@ -16,7 +20,7 @@ class DataFilesController < ApplicationController
 
     flash.now[:success]="Great Success"
 
-    @data_file = DataFile.new({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
+    @data_file = current_user.data_files.build({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
     @data_file.save
     render :new
 	end
