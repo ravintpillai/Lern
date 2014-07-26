@@ -6,6 +6,11 @@ class DataFilesController < ApplicationController
 	end
 
 	def new
+    if user_signed_in?
+      render :new
+    else
+      redirect_to "users/sign_up"
+    end
 	end
 
 	def create

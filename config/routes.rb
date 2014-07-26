@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root 'splash_pages#index'
   match '/register_interest',  to: 'splash_pages#register_interest', via: 'get'
   resources :users
