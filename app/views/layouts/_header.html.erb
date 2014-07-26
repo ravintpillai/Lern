@@ -4,11 +4,12 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Register", "/users/sign_up"%></li>
+          <li><%= link_to "Register", new_user_registration_path %></li>
           <% if user_signed_in? %>
-          <li><%= link_to "Upload a File", "data_files/new"%></li>
+          <li><%= link_to "Upload a File", new_data_file_path %></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
           <% else %>
-          <li><%= link_to "Sign in", "users/sign_in" %></li>
+          <li><%= link_to "Sign in", user_session_path %></li>
           <% end %>
         </ul>
       </nav>

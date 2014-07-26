@@ -1,5 +1,4 @@
 require 'fileutils'
-
 class DataFilesController < ApplicationController
 
 	def index
