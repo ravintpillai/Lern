@@ -20,7 +20,7 @@ class DataFilesController < ApplicationController
 
     flash.now[:success]="Great Success"
 
-    @data_file = DataFile.new({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
+    @data_file = current_user.data_files.build({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
     @data_file.save
     render :new
 	end
