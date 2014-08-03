@@ -22,7 +22,7 @@ class DataFilesController < ApplicationController
 
     @data_file = current_user.data_files.build({path: "#{Rails.root}/public/#{safe_data[:csv].original_filename}"})
     @data_file.save
-    render :new
+    redirect_to new_result_path(id: @data_file.id)
 	end
 
 	def show
@@ -30,7 +30,6 @@ class DataFilesController < ApplicationController
 
 	def index
 	end
-
 
 	private
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726155837) do
+ActiveRecord::Schema.define(version: 20140803121936) do
 
   create_table "data_files", force: true do |t|
     t.string   "path"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20140726155837) do
   end
 
   add_index "data_files", ["user_id"], name: "index_data_files_on_user_id"
+
+  create_table "results", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "data_file_id"
+  end
+
+  add_index "results", ["data_file_id"], name: "index_results_on_data_file_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
