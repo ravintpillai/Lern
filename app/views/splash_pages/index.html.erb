@@ -10,7 +10,11 @@
 	</ol>
 	</p>
 	<h2>
-	<%= link_to "Register Your Interest", "/users/sign_up", class: "btn btn-large btn-primary" %>
+	<% if !user_signed_in? %>
+		<%= link_to "Register Your Interest", "/users/sign_up", class: "btn btn-large btn-primary" %>
+	<% else %>
+		<%= link_to "Upload a File", new_data_file_path, class: "btn btn-large btn-primary" %>
+	<% end %>
 	</h2>
 	<h2>
 	<%= link_to image_tag("graph.jpg", alt:"All our graphs are this sexy"), root_path %>
