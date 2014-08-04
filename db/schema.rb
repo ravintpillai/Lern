@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140803121936) do
+ActiveRecord::Schema.define(version: 20140803213136) do
 
   create_table "data_files", force: true do |t|
     t.string   "path"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20140803121936) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "data_file_id"
+    t.float    "coefficient"
+    t.float    "intercept"
   end
 
   add_index "results", ["data_file_id"], name: "index_results_on_data_file_id"

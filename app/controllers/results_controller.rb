@@ -3,15 +3,16 @@ require 'matrix'
 class ResultsController < ApplicationController
 
 	def new
-		path = DataFile.find(params[:id]).path
+		@datafile = DataFile.find(params[:id])
+		path = @datafile.path
 		@result = analyze(path)
 		render :new
 	end
 
 	def create
-		path = DataFile.find(params[:id]).path
-		result = analyze(path)
-		puts result
+		result = Result.new({:coefficient => params[:coefficient], :intercept => params[:intercept], :data_file_id => params[:dfid]})
+		result.save
+		redirect_to root_path
 	end
 
 	def show
