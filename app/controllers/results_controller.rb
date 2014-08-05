@@ -5,7 +5,7 @@ class ResultsController < ApplicationController
 	def new
 		@datafile = DataFile.find(params[:id])
 		path = @datafile.path
-		@result = analyze(path)
+		@result = normal_equation(analyze(path))
 		render :new
 	end
 
@@ -29,37 +29,31 @@ class ResultsController < ApplicationController
 			independents = []
 			dependents = []
 			count = 0
-			puts "count = #{count}\n\n\n\n"
 			file_split_by_line.each do |kl|
 			  fl = kl.split(",")
 			  fl.each do |fkl|
 			    count +=1
 			    if (count%2) > 0
-			      puts "independent is #{fkl}"
 			      independents << fkl.to_i
 			    else
-			      puts "dependent is #{fkl}"	
 			      dependents << fkl.to_i
 			    end
 			  end
 			end
-			k = independents.shift
-			y = dependents.shift
-			puts "k = #{k}"
-			puts "y = #{y}"
-			puts dependents
-			puts independents
-			#puts independents
-			ones = Array.new(independents.length, 1)
-			mat = Matrix.row_vector(ones)
-			#puts mat
-			#puts mat.to_a
-			mat = Matrix.rows(mat.to_a << dependents)
-			mats = mat.transpose
 
-			mat2 = Matrix.row_vector(independents).transpose
-			puts mats
-			puts mat2
-			jkl = (((mats.transpose * mats).inverse)*mats.transpose*mat2)
+			return [independents,dependents]
+		end
+
+		def normal_equation(training_examples)
+			independents = training_examples[0]
+			dependents = training_examples[1]
+			independent_parameter_name = independents.shift
+			dependent_parameter_name = dependents.shift
+			ones = Array.new(independents.length, 1)
+			theta_vector = Matrix.row_vector(ones)
+			theta_matrix = Matrix.rows(theta_vector.to_a << dependents)
+			theta_matrix = theta_matrix.transpose
+			y_vector = Matrix.row_vector(independents).transpose
+			result_matrix = (((theta_matrix.transpose * theta_matrix).inverse)*theta_matrix.transpose*y_vector)
 		end
 end
