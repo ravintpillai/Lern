@@ -1,4 +1,5 @@
 require 'matrix'
+require 'open-uri'
 
 class ResultsController < ApplicationController
 
@@ -26,8 +27,7 @@ class ResultsController < ApplicationController
 		end
 
 		def analyze(path)
-			file = File.open(path,'rb')
-			long_version = file.read
+			long_version = open(path) {|f| f.read}
 			file_split_by_line = long_version.split "\r"
 			independents = []
 			dependents = []
