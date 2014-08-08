@@ -10,7 +10,7 @@ class ResultsController < ApplicationController
 	end
 
 	def create
-		result = Result.new({:coefficient => params[:coefficient], :intercept => params[:intercept], :data_file_id => params[:dfid]})
+		result = Result.new(result_params)
 		result.save
 		redirect_to root_path
 	end
@@ -20,6 +20,10 @@ class ResultsController < ApplicationController
 
 
 	private
+
+		def result_params
+			params.require(:result).permit(:coefficient, :intercept, :data_file_id)
+		end
 
 		def analyze(path)
 			file = File.open(path,'rb')
