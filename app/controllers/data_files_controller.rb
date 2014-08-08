@@ -14,7 +14,6 @@ class DataFilesController < ApplicationController
 	end
 
 	def create
-    Rails.logger.info "Ravin, it's a #{safe_data[:raw].class}"
     flash.now[:success]="Great Success"
     @data_file = current_user.data_files.build(safe_data)
     @data_file.save
@@ -34,5 +33,3 @@ class DataFilesController < ApplicationController
 			params.require('data_file').permit(:raw)
 		end
 end
-
-"https://s3-eu-west-1.amazonaws.com/thambapillailern/data/#{}/timsdata.csv"
