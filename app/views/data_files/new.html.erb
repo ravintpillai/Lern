@@ -2,9 +2,8 @@
 
 <h1> Upload a file! </h1>
 
-<%= form_tag(data_files_path, { method: :post, multipart: true }) do %>
-  <fieldset>
-    <%= file_field_tag  'data_file[csv]' %>
-  </fieldset>
+<%= form_for @data_file, :url => data_files_path, :html => { :multipart => true } do |form| %>
+  <%= form.file_field :raw %>
   <%= submit_tag 'Upload' %>
 <% end %>
+

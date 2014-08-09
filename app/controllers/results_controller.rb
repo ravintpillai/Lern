@@ -1,4 +1,5 @@
 require 'matrix'
+require 'open-uri'
 
 class ResultsController < ApplicationController
 
@@ -25,9 +26,16 @@ class ResultsController < ApplicationController
 			params.require(:result).permit(:coefficient, :intercept, :data_file_id)
 		end
 
+		def number_parameters(results)
+
+		end
+
+
+
+
+
 		def analyze(path)
-			file = File.open(path,'rb')
-			long_version = file.read
+			long_version = open(path) {|f| f.read}
 			file_split_by_line = long_version.split "\r"
 			independents = []
 			dependents = []
@@ -45,10 +53,6 @@ class ResultsController < ApplicationController
 			  end
 			  dependents << example_dependents
 			end
-			puts "and the dependents are "
-			puts dependents
-			puts "and the dependents length is "
-			puts dependents.length
 			return [independents,dependents]
 		end
 
@@ -60,29 +64,19 @@ class ResultsController < ApplicationController
 			ones = Array.new(independents.length, 1)
 			theta_matrix = Matrix.row_vector(ones)
 			theta_matrix_as_array = []
-			puts "dependents length is #{dependents.length}"
 			(0..dependents[0].length-1).each do |parameter_index|
 				param_vec = []
 				dependents.each do |dependent_paramater_vector|
 					param_vec << dependent_paramater_vector[parameter_index]
 				end
 				theta_matrix_as_array << param_vec
-				puts 'param vev is'
-				puts param_vec
 			end
-			puts "theta matrix as array is #{theta_matrix_as_array.length}"
-			puts theta_matrix_as_array
 			theta_matrix_as_array.each do |parameter_array|
 				theta_matrix = Matrix.rows(theta_matrix.to_a << parameter_array)
 			end
 			theta_matrix = theta_matrix.transpose
 			y_vector = Matrix.row_vector(independents).transpose
-			puts 'theta_matrix is'
-			theta_matrix
-			puts 'y vector is'
-			puts y_vector
 			result_matrix = (((theta_matrix.transpose * theta_matrix).inverse)*theta_matrix.transpose*y_vector)
-			puts 'result matrix is'
 			puts result_matrix
 			result_matrix
 		end
