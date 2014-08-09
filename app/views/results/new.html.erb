@@ -1,5 +1,11 @@
+<% alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %>
 <h1>The results are in!<h1>
 
-	<div><p> Y = <%= @result[1,0].to_f %> * X + <%= @result[2,0].to_f %> * Z + <%= @result[0,0].to_f %></p></div>
+
+ <div><p>Y = </div></p>
+ <% for i in 0..@result.row_count-2%><div><p>
+  +<%= @result[i+1,0].to_f.round(2) %><%= alphabet[i] %></div></p> <% end %>
+
+  <div><p> + <%= @result[0,0].to_f.round(2) %></div></p>
 
 	<div><%= link_to "Save Results", results_path(result: { coefficient: @result[1,0].to_f, intercept: @result[0,0].to_f, dfid: @datafile.id }), method: :post, class: "btn btn-large btn-primary" %></div>

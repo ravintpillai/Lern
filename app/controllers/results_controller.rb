@@ -26,6 +26,14 @@ class ResultsController < ApplicationController
 			params.require(:result).permit(:coefficient, :intercept, :data_file_id)
 		end
 
+		def number_parameters(results)
+
+		end
+
+
+
+
+
 		def analyze(path)
 			long_version = open(path) {|f| f.read}
 			file_split_by_line = long_version.split "\r"
@@ -69,5 +77,7 @@ class ResultsController < ApplicationController
 			theta_matrix = theta_matrix.transpose
 			y_vector = Matrix.row_vector(independents).transpose
 			result_matrix = (((theta_matrix.transpose * theta_matrix).inverse)*theta_matrix.transpose*y_vector)
+			puts result_matrix
+			result_matrix
 		end
 end
