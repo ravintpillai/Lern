@@ -2,6 +2,8 @@
 
 <h1> Upload a file! </h1>
 
+<p>Upload a csv file of your data, making sure to include your independent variables in the far left hand column of your data left hand side</p>
+
 <%= form_for @data_file, :url => data_files_path, :html => { :multipart => true } do |form| %>
   <%= form.file_field :raw %>
   <%= submit_tag 'Upload' %>
