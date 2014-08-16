@@ -34,5 +34,8 @@
         	<%end%>
 			<%= yield %>
 		</div>
+    <script>
+      mixpanel.track("Pageview");
+    </script>
 	</body>
 </html>
