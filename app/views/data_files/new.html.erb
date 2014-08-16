@@ -2,8 +2,7 @@
 
 <h1> Upload a file! </h1>
 
-<%= form_for @data_file, :url => data_files_path, :html => { :multipart => true, :onsubmit => "dataLayer.push({'form_upload': 'linear'});"} do |form| %>
+<%= form_for @data_file, :url => data_files_path, :html => { :multipart => true} do |form| %>
   <%= form.file_field :raw %>
   <%= submit_tag 'Upload' %>
 <% end %>
-
