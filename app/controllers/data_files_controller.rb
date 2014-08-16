@@ -18,7 +18,7 @@ class DataFilesController < ApplicationController
     @data_file = current_user.data_files.build(safe_data)
     @data_file.save
     @data_file.update_attributes(path: "https://s3-eu-west-1.amazonaws.com/thambapillailern/data/#{@data_file.id}/#{@data_file.raw_file_name}")
-    redirect_to new_result_path(id: @data_file.id)
+    redirect_to new_result_path(id: @data_file.id, upload: "linear")
 	end
 
 	def show
