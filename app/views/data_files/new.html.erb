@@ -2,6 +2,12 @@
 
 <h1> Upload a file! </h1>
 
+  <p>Upload a csv sheet of data and hit upload, in order to find out what the relationship between the variables in your dataset are. Make sure all your variables are integers! Below
+    is an example of how to format the data. Put the thing you want to be able to predict in the first column, and the variables you want to use to predict them in the columns afterwards. The results are in the form:</p>
+    <p> Wages = a * Schooling + b * Height + c * IQ + d</p>
+
+  <%= image_tag "Lern_Guidance.jpg" %>
+
 <%= form_for @data_file, :url => data_files_path, :html => { :multipart => true} do |form| %>
   <%= form.file_field :raw %>
   <%= submit_tag 'Upload' %>
