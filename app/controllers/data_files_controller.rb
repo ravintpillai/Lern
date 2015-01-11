@@ -14,11 +14,15 @@ class DataFilesController < ApplicationController
 	end
 
 	def create
-    flash.now[:success]="Great Success"
     @data_file = current_user.data_files.build(safe_data)
-    @data_file.save
-    @data_file.update_attributes(path: "https://s3-eu-west-1.amazonaws.com/thambapillailern/data/#{@data_file.id}/#{@data_file.raw_file_name}")
-    redirect_to new_result_path(id: @data_file.id, upload: "linear")
+    if @data_file.save
+      @data_file.update_attributes(path: "https://s3-eu-west-1.amazonaws.com/thambapillailern/data/#{@data_file.id}/#{@data_file.raw_file_name}")
+      flash[:success]="Great Success"
+      redirect_to new_result_path(id: @data_file.id, upload: "linear")
+    else
+      flash[:notice]="Sorry, something went wrong with your file. Was it a CSV?"
+      redirect_to new_data_file_path
+    end
 	end
 
 	def show
