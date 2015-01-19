@@ -1,13 +1,19 @@
 require 'matrix'
 require 'open-uri'
+require 'net/http'
 
 class ResultsController < ApplicationController
 
 	def new
 		@datafile = DataFile.find(params[:id])
 		path = @datafile.path
-		@result = normal_equation(analyze(path))
-		render :new
+		begin
+			@result = normal_equation(analyze(path))
+			render :new
+		rescue
+			flash[:now]="The data you have uploaded is not suitable for linear regression"
+			redirect_to new_data_file_path
+		end
 	end
 
 	def create
@@ -27,12 +33,7 @@ class ResultsController < ApplicationController
 		end
 
 		def number_parameters(results)
-
 		end
-
-
-
-
 
 		def analyze(path)
 			long_version = open(path) {|f| f.read}
