@@ -54,6 +54,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (2.1.2)
@@ -70,6 +72,7 @@ GEM
     mini_portile (0.6.0)
     minitest (5.4.0)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
@@ -150,6 +153,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   coffee-rails (~> 4.0.0)
   devise
+  faraday
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 4.1)

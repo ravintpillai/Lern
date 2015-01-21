@@ -39,6 +39,8 @@ gem "paperclip", "~> 4.1"
 #Use AWS SDK
 gem 'aws-sdk'
 
+gem 'faraday'
+
 group :development, :test do
     gem 'sqlite3'
 end
